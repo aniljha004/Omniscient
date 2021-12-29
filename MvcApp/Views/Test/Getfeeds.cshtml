@@ -1,0 +1,10 @@
+﻿@model IEnumerable<MvcApp.Models.SubmissionModel>
+
+<div class="container-fluid">
+ <ul class="list-group">
+     @foreach (var item in Model)
+        {
+            <li class="list-group-item ">@item.UserName : @item.Content</li>
+        }
+    </ul>
+</div>

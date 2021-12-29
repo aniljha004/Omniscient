@@ -25,18 +25,26 @@ namespace MvcApp.Controllers
         {
             return View();
         }
+
+        public ViewResult GetFeeds()
+        {
+            var feedcoll=_subSvc.Read();
+            return View(feedcoll.ToList());
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult<SubmissionModel> Create(SubmissionModel submission)
         {
             submission.Created = submission.LastUpdated = DateTime.Now;
-            submission.UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
-            submission.UserName = User.Identity.Name;
+            submission.UserId = "0232131232234";
+            submission.UserName = "Anil";
+            //submission.UserId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            //ubmission.UserName = User.Identity.Name;
             if (ModelState.IsValid)
             {
                 _subSvc.Create(submission);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("GetFeeds");
         }
     }
 }
